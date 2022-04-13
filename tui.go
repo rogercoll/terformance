@@ -54,12 +54,13 @@ func NewTUI() *TUI {
 	messages := tview.NewGrid().SetRows(0).
 		AddItem(t.Schema, 0, 0, 1, 1, 0, 0, false)
 	t.Grid = tview.NewGrid().
-		SetRows(0, 35).
+		SetRows(0, 25).
 		SetBorders(true).
 		AddItem(header, 0, 0, 1, 1, 0, 0, true).
 		AddItem(messages, 1, 0, 2, 1, 0, 0, false)
 
 	t.setBackground(tcell.ColorBlack)
+	t.setupKeyboard()
 
 	return &t
 }
@@ -67,4 +68,8 @@ func NewTUI() *TUI {
 // Start starts terminal user interface application.
 func (tui *TUI) Start() error {
 	return tui.App.SetRoot(tui.Grid, true).EnableMouse(false).Run()
+}
+
+func (tui *TUI) LoadData() {
+	tui.Road.SetText("Roadddddddd")
 }
