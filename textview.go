@@ -1,22 +1,48 @@
 package terformance
 
-import "github.com/rivo/tview"
+import (
+	"fmt"
+	"strconv"
+
+	"github.com/rivo/tview"
+)
 
 type DynamicText interface {
-	Init() string
-	Update() string
+	Init()
+	Update()
+	tview.Primitive
 }
 
 type IncrementalText struct {
-	inc  int
-	text string
+	inc          int
+	textTemplate string
 	*tview.TextView
 }
 
-func (i *IncrementalText) Init() string {
-	return i.text
+// show a new file line on every update
+type LineByLineList struct {
+	inc          int
+	textTemplate string
+	*tview.List
 }
 
-func (i *IncrementalText) Update() string {
-	return i.text
+//TODO: Implement String interface and return it in Init and Update
+func (i *IncrementalText) Init() {
+	i.SetText(fmt.Sprintf(i.textTemplate, strconv.Itoa(i.inc)))
+	return
+}
+
+func (i *IncrementalText) Update() {
+	i.inc += 1
+	i.SetText(fmt.Sprintf(i.textTemplate, strconv.Itoa(i.inc)))
+	return
+}
+
+func NewIncrementalText(t string, textView *tview.TextView) *IncrementalText {
+	//TODO: check if valid template
+	return &IncrementalText{
+		0,
+		t,
+		textView,
+	}
 }
