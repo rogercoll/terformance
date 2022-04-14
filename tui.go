@@ -45,10 +45,10 @@ func NewTUI() *TUI {
 	messages := tview.NewGrid().SetRows(0).
 		AddItem(t.Schema, 0, 0, 1, 1, 0, 0, false)
 	t.Grid = tview.NewGrid().
-		SetRows(0, 25).
+		SetRows(1).
 		SetBorders(true).
-		AddItem(header, 0, 0, 1, 1, 0, 0, true).
-		AddItem(messages, 1, 0, 2, 1, 0, 0, false)
+		AddItem(header, 0, 0, 2, 2, 0, 0, true).
+		AddItem(messages, 3, 0, 22, 2, 0, 0, false)
 
 	//t.setBackground(tcell.ColorBlack)
 	t.setupKeyboard()
