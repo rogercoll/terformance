@@ -1,4 +1,4 @@
-package terformance
+package tui
 
 import "github.com/gdamore/tcell/v2"
 
@@ -9,6 +9,8 @@ func (tui *TUI) setupKeyboard() {
 			tui.Road.Update()
 		case tcell.KeyCtrlB:
 			tui.Persons.Update()
+		case tcell.KeyCtrlD:
+			tui.Schema.Update()
 		}
 		return event
 	})

@@ -1,4 +1,4 @@
-package terformance
+package dynamic
 
 import (
 	"fmt"
@@ -7,23 +7,10 @@ import (
 	"github.com/rivo/tview"
 )
 
-type DynamicText interface {
-	Init()
-	Update()
-	tview.Primitive
-}
-
 type IncrementalText struct {
 	inc          int
 	textTemplate string
 	*tview.TextView
-}
-
-// show a new file line on every update
-type LineByLineList struct {
-	inc          int
-	textTemplate string
-	*tview.List
 }
 
 //TODO: Implement String interface and return it in Init and Update
