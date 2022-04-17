@@ -1,8 +1,19 @@
 package main
 
-import "github.com/rogercoll/terformance/internal/controller"
+import (
+	"log"
+	"os"
+
+	"github.com/rogercoll/terformance/internal/controller"
+)
 
 func main() {
-	c := controller.LoadConfig()
+	if len(os.Args) != 2 {
+		log.Fatal("Provide filename to create list")
+	}
+	c, err := controller.LoadConfig(os.Args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
 	c.Run()
 }

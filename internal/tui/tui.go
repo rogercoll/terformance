@@ -3,6 +3,7 @@ package tui
 import (
 	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
+	"github.com/rogercoll/terformance/internal/config"
 	"github.com/rogercoll/terformance/pkg/dynamic"
 )
 
@@ -37,7 +38,7 @@ func newTable(columnsTitles []string) *tview.Table {
 	return t
 }
 
-func NewTUI() *TUI {
+func NewTUI(cfg config.AppConfig) (*TUI, error) {
 	t := TUI{}
 	t.App = tview.NewApplication()
 
@@ -46,7 +47,11 @@ func NewTUI() *TUI {
 	t.Objects = dynamic.NewIncrementalText("Objects: %s", tview.NewTextView().SetTextColor(tcell.ColorAqua))
 	t.Music = dynamic.NewIncrementalText("Music: %s", tview.NewTextView().SetTextColor(tcell.ColorAqua))
 
-	t.Schema = dynamic.NewLineByLineTable(newTable([]string{"TASCA", "USUARI", "TEMPS+", "COMMAND"}))
+	var err error
+	t.Schema, err = dynamic.NewLineByLineTable(cfg.FileName, newTable([]string{"TASCA", "USUARI", "TEMPS+", "COMMAND"}))
+	if err != nil {
+		return nil, err
+	}
 
 	// Configure appearance
 	t.Persons.Init()
@@ -73,7 +78,7 @@ func NewTUI() *TUI {
 	//t.setBackground(tcell.ColorBlack)
 	t.setupKeyboard()
 
-	return &t
+	return &t, nil
 }
 
 // Start starts terminal user interface application.
