@@ -25,7 +25,10 @@ func (i *LineByLineTable) Init() {
 	return
 }
 
-func (i *LineByLineTable) Update() {
+func (i *LineByLineTable) Update(app *tview.Application) {
+	if i.pos == 0 {
+		i.ini = time.Now()
+	}
 	i.pos += 1
 	i.InsertRow(i.pos)
 	i.SetCell(i.pos, 0, tview.NewTableCell(strconv.Itoa(i.pos)).SetAlign(tview.AlignRight))
@@ -40,7 +43,12 @@ func (i *LineByLineTable) Update() {
 	if i.pos < len(i.data) {
 		text = i.data[i.pos]
 	}
-	i.SetCell(i.pos, 3, tview.NewTableCell(text).SetAlign(tview.AlignCenter))
+	cell := tview.NewTableCell("").SetAlign(tview.AlignCenter)
+	for j, _ := range text {
+		i.SetCell(i.pos, 3, cell.SetText(text[:j]))
+		app.ForceDraw()
+		time.Sleep(40 * time.Millisecond)
+	}
 	return
 }
 

@@ -19,7 +19,7 @@ func (i *IncrementalText) Init() {
 	return
 }
 
-func (i *IncrementalText) Update() {
+func (i *IncrementalText) Update(*tview.Application) {
 	i.inc += 1
 	i.SetText(fmt.Sprintf(i.textTemplate, strconv.Itoa(i.inc)))
 	return

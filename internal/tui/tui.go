@@ -11,10 +11,16 @@ type TUI struct {
 	App  *tview.Application
 	Grid *tview.Grid
 
-	Persons dynamic.DynamicItem
-	Road    dynamic.DynamicItem
-	Objects dynamic.DynamicItem
-	Music   dynamic.DynamicItem
+	Persons    dynamic.DynamicItem
+	University dynamic.DynamicItem
+
+	Light dynamic.DynamicItem
+	// static text
+	File *tview.TextView
+
+	// static text
+	Date *tview.TextView
+	Time dynamic.DynamicItem
 
 	Schema dynamic.DynamicItem
 }
@@ -42,10 +48,12 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 	t := TUI{}
 	t.App = tview.NewApplication()
 
-	t.Persons = dynamic.NewIncrementalText("[yellow::b]Persons:[-:-:-]"+" [ %s ]", tview.NewTextView().SetDynamicColors(true))
-	t.Road = dynamic.NewIncrementalText("Road: %s%%", tview.NewTextView().SetTextColor(tcell.ColorAqua))
-	t.Objects = dynamic.NewIncrementalText("Objects: %s", tview.NewTextView().SetTextColor(tcell.ColorAqua))
-	t.Music = dynamic.NewIncrementalText("Music: %s", tview.NewTextView().SetTextColor(tcell.ColorAqua))
+	t.Persons = dynamic.NewIncrementalText("[yellow::b]Persones:[-:-:-]"+" [ %s ]", tview.NewTextView().SetDynamicColors(true))
+	t.University = dynamic.NewIncrementalText("Universitat: %s%%", tview.NewTextView().SetTextColor(tcell.ColorAqua))
+	t.Light = dynamic.NewIncrementalText("Llums encesos: %s", tview.NewTextView().SetTextColor(tcell.ColorAqua))
+	t.File = tview.NewTextView().SetDynamicColors(true).SetText("C:/[red::b]25AnysUVIC-UCC[-:-:-]/Pre-lu-di")
+	t.Date = tview.NewTextView().SetText("20/05/2022")
+	t.Time = dynamic.NewTimer("%s", tview.NewTextView().SetDynamicColors(true))
 
 	var err error
 	t.Schema, err = dynamic.NewLineByLineTable(cfg.FileName, newTable([]string{"TASCA", "USUARI", "TEMPS+", "COMMAND"}))
@@ -55,25 +63,27 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 
 	// Configure appearance
 	t.Persons.Init()
-	t.Road.Init()
-	t.Objects.Init()
-	t.Music.Init()
+	t.University.Init()
+	t.Light.Init()
+	t.Time.Init()
 
 	// Input handlers
 
 	// Layout
 	header := tview.NewGrid().SetRows(0, 0).
 		AddItem(t.Persons, 0, 0, 1, 1, 0, 0, false).
-		AddItem(t.Road, 1, 0, 1, 1, 0, 0, false).
-		AddItem(t.Objects, 0, 1, 1, 1, 0, 0, false).
-		AddItem(t.Music, 1, 1, 1, 1, 0, 0, false)
+		AddItem(t.University, 1, 0, 1, 1, 0, 0, false).
+		AddItem(t.Light, 0, 1, 1, 1, 0, 0, false).
+		AddItem(t.File, 1, 1, 1, 1, 0, 0, false).
+		AddItem(t.Date, 0, 2, 1, 1, 0, 0, false).
+		AddItem(t.Time, 1, 2, 1, 1, 0, 0, false)
 	messages := tview.NewGrid().SetRows(0).
 		AddItem(t.Schema, 0, 0, 1, 1, 0, 0, false)
 	t.Grid = tview.NewGrid().
 		SetRows(1).
 		SetBorders(false).
-		AddItem(header, 0, 0, 2, 2, 0, 0, true).
-		AddItem(messages, 3, 0, 22, 2, 0, 0, false)
+		AddItem(header, 0, 0, 2, 3, 0, 0, true).
+		AddItem(messages, 3, 0, 22, 3, 0, 0, false)
 
 	//t.setBackground(tcell.ColorBlack)
 	t.setupKeyboard()
@@ -84,9 +94,4 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 // Start starts terminal user interface application.
 func (tui *TUI) Start() error {
 	return tui.App.SetRoot(tui.Grid, true).EnableMouse(false).Run()
-}
-
-func (tui *TUI) LoadData() {
-	tui.Road.Update()
-	tui.Persons.Update()
 }
