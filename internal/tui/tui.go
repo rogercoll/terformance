@@ -30,16 +30,21 @@ func newTable(columnsTitles []string) *tview.Table {
 	color := tcell.ColorBlack
 	bckColor := tcell.ColorRed
 	for c, title := range columnsTitles {
-		expansion := 1
 		if c == 3 {
-			expansion = 8
+			t.SetCell(0, c,
+				tview.NewTableCell(title).
+					SetTextColor(color).
+					SetBackgroundColor(bckColor).
+					SetExpansion(18).
+					SetAlign(tview.AlignLeft))
+		} else {
+			t.SetCell(0, c,
+				tview.NewTableCell(title).
+					SetTextColor(color).
+					SetBackgroundColor(bckColor).
+					SetMaxWidth(14).
+					SetAlign(tview.AlignCenter))
 		}
-		t.SetCell(0, c,
-			tview.NewTableCell(title).
-				SetTextColor(color).
-				SetBackgroundColor(bckColor).
-				SetExpansion(expansion).
-				SetAlign(tview.AlignCenter))
 	}
 	return t
 }

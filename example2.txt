@@ -1,0 +1,7 @@
+content:
+  - text: "Hello"
+    color: red
+  - text: "Goodbye"
+    color: green
+  - text: "Goodbye Goodbye GoodbyeGoodbyeGoodbyeGoodbye \nGoodbyeGoodbyeGoodbye GoodbyeGoodbyeGoodbyGoodbye GoodbyeGoodbyeGoodbyGoodbye GoodbyeGoodbyeGoodbyGoodbye GoodbyeGoodbyeGoodbyGoodbye GoodbyeGoodbyeGoodbyGoodbye GoodbyeGoodbyeGoodbyeeeeee Goodbye GoodbyeGoodbyeGoodbye"
+    color: yellow
