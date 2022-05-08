@@ -28,7 +28,7 @@ type TUI struct {
 func newTable(columnsTitles []string) *tview.Table {
 	t := tview.NewTable().SetFixed(1, len(columnsTitles))
 	color := tcell.ColorBlack
-	bckColor := tcell.ColorRed
+	bckColor := tcell.ColorWhite
 	for c, title := range columnsTitles {
 		if c == 3 {
 			t.SetCell(0, c,
@@ -53,10 +53,10 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 	t := TUI{}
 	t.App = tview.NewApplication()
 
-	t.Persons = dynamic.NewIncrementalText("[blue::b]Persones en escenta:[-:-:-]"+" [ %s ]", tview.NewTextView().SetDynamicColors(true))
-	t.University = dynamic.NewDimensionalText("[blue::b]Universitat:[-:-:-]\t%s", tview.NewTextView().SetDynamicColors(true), []int{1717, 1977, 1997, 2022})
-	t.Light = dynamic.NewDimensionalText("[blue::b]Llums encesos:[-:-:-]\t[%s/25]", tview.NewTextView().SetDynamicColors(true), []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25})
-	t.File = tview.NewTextView().SetDynamicColors(true).SetText("C:/[red::b]25AnysUVIC-UCC[-:-:-]/Pre-lu-di")
+	t.Persons = dynamic.NewIncrementalText("[#3DFFF3::b]Persones en escena:[-:-:-]"+" [ %s ]", tview.NewTextView().SetDynamicColors(true))
+	t.University = dynamic.NewDimensionalText("[#3DFFF3::b]Universitat:[-:-:-]\t%s", tview.NewTextView().SetDynamicColors(true), []int{1717, 1977, 1997, 2022})
+	t.Light = dynamic.NewDimensionalText("[#3DFFF3::b]Llums encesos:[-:-:-]\t[%s/25]", tview.NewTextView().SetDynamicColors(true), []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25})
+	t.File = tview.NewTextView().SetDynamicColors(true).SetText("C:/[#FF1B1B::b]25AnysUVIC-UCC[-:-:-]/Pre-lu-di")
 	t.Date = tview.NewTextView().SetText("20/05/2022")
 	t.Time = dynamic.NewTimer("%s", tview.NewTextView().SetDynamicColors(true))
 
