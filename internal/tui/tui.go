@@ -53,7 +53,7 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 	t := TUI{}
 	t.App = tview.NewApplication()
 
-	t.Persons = dynamic.NewIncrementalText("[#3DFFF3::b]Persones en escena:[-:-:-]"+" [ %s ]", tview.NewTextView().SetDynamicColors(true))
+	t.Persons = dynamic.NewIncrementalText("[#3DFFF3::b]Persones:[-:-:-]"+" [ %s ]", tview.NewTextView().SetDynamicColors(true))
 	t.University = dynamic.NewDimensionalText("[#3DFFF3::b]Universitat:[-:-:-]\t%s", tview.NewTextView().SetDynamicColors(true), []int{1717, 1977, 1997, 2022})
 	t.Light = dynamic.NewDimensionalText("[#3DFFF3::b]Llums encesos:[-:-:-]\t[%s/25]", tview.NewTextView().SetDynamicColors(true), []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25})
 	t.File = tview.NewTextView().SetDynamicColors(true).SetText("C:/[#FF1B1B::b]25AnysUVIC-UCC[-:-:-]/Pre-lu-di")
@@ -61,7 +61,7 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 	t.Time = dynamic.NewTimer("%s", tview.NewTextView().SetDynamicColors(true))
 
 	var err error
-	t.Schema, err = dynamic.NewLineByLineTable(cfg.FileName, newTable([]string{"TASCA", "USUARI", "TEMPS+", "COMMAND"}))
+	t.Schema, err = dynamic.NewLineByLineTable(cfg.FileName, newTable([]string{"TASCA", "USUARI", "TEMPS+", "COMANDAMENT"}))
 	if err != nil {
 		return nil, err
 	}

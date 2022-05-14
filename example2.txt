@@ -3,5 +3,7 @@ content:
     color: red
   - text: "Goodbye"
     color: green
+  - text: "Goodbye"
+    color: "#bf00ff"
   - text: "Goodbye GoodbyeGoodbyeGoodbyeeeeee Goodbye GoodbyeGoodbyeGoodbye"
     color: yellow
