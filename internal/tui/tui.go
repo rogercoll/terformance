@@ -84,11 +84,14 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 		AddItem(t.Time, 1, 2, 1, 1, 0, 0, false)
 	messages := tview.NewGrid().SetRows(0).
 		AddItem(t.Schema, 0, 0, 1, 1, 0, 0, false)
+	messages2 := tview.NewGrid().SetRows(0).
+		AddItem(tview.NewTable().SetFixed(1, 1), 0, 0, 1, 1, 0, 0, false)
 	t.Grid = tview.NewGrid().
 		SetRows(1).
 		SetBorders(false).
 		AddItem(header, 0, 0, 2, 3, 0, 0, true).
-		AddItem(messages, 3, 0, 22, 3, 0, 0, false)
+		AddItem(messages, 3, 0, 22, 3, 0, 0, false).
+		AddItem(messages2, 26, 0, 15, 3, 0, 0, false)
 
 	//t.setBackground(tcell.ColorBlack)
 	t.setupKeyboard()
