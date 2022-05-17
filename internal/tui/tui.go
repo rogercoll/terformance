@@ -90,8 +90,8 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 		SetRows(1).
 		SetBorders(false).
 		AddItem(header, 0, 0, 2, 3, 0, 0, true).
-		AddItem(messages, 3, 0, 22, 3, 0, 0, false).
-		AddItem(messages2, 26, 0, 15, 3, 0, 0, false)
+		AddItem(messages, 3, 0, 16, 3, 0, 0, false).
+		AddItem(messages2, 19, 0, 6, 3, 0, 0, false)
 
 	//t.setBackground(tcell.ColorBlack)
 	t.setupKeyboard()
