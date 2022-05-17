@@ -61,7 +61,7 @@ func NewTUI(cfg config.AppConfig) (*TUI, error) {
 	t.Time = dynamic.NewTimer("%s", tview.NewTextView().SetDynamicColors(true))
 
 	var err error
-	t.Schema, err = dynamic.NewLineByLineTable(cfg.FileName, newTable([]string{"TASCA", "USUARI", "TEMPS+", "COMANDAMENT"}))
+	t.Schema, err = dynamic.NewLineByLineTable(cfg.FileName, newTable([]string{"TASCA", "USUARI", "TEMPS+", "ACCIÓ"}))
 	if err != nil {
 		return nil, err
 	}
