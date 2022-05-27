@@ -2,6 +2,8 @@
 
 Program used in the background of a University's commemoration.
 
+![](./photos/real1.jpeg)
+![](./photos/real2.jpeg)
 
 ## Usage
 
